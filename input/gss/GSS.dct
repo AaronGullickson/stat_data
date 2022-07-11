@@ -1,0 +1,14 @@
+ 
+infile dictionary {
+
+_column(3) 	 numeric 		 SEXORNT 		 %20f 		 "Sexual orientation" 
+_column(10) 	 numeric 		 BALLOT 		 %20f 		 "Ballot used for interview" 
+_column(17) 	 numeric 		 MARITAL 		 %20f 		 "Marital status" 
+_column(24) 	 numeric 		 AGE 		 %20f 		 "Age of respondent" 
+_column(31) 	 numeric 		 EDUC 		 %20f 		 "Highest year of school completed" 
+_column(38) 	 numeric 		 SEX 		 %20f 		 "Respondents sex" 
+_column(45) 	 numeric 		 RELIG 		 %20f 		 "R's religious preference" 
+_column(52) 	 numeric 		 FUND 		 %20f 		 "How fundamentalist Is R currently" 
+_column(59) 	 numeric 		 SEXFREQ 		 %20f 		 "Frequency of sex during last year" 
+_column(66) 	 numeric 		 YEAR 		 %20f 		 "GSS year for this respondent" 
+}
