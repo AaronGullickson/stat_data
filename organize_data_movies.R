@@ -74,7 +74,11 @@ scraped_data <- map_dfr(imdb$tconst, function(x){
   }
 
   # read OMDB page
-  title_page <- curl::curl(url) %>% read_html()
+  title_page <- NULL
+  try(title_page <- curl::curl(url) %>% read_html(), silent=TRUE)
+  if(is.null(title_page)) {
+    return(NULL)
+  }
 
   #grab JSON data - wrap in a try to avoid errors stopping the execution
   omdb <- NULL
