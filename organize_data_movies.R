@@ -88,6 +88,8 @@ scraped_data <- map_dfr(imdb$tconst, function(x){
     return(NULL)
   }
 
+  print(x)
+
   # Output for each movie
   return(list("tconst"=x,
               "maturity_rating"=ifelse(omdb$Rated=="N/A", NA, omdb$Rated),
