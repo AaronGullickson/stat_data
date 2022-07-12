@@ -56,13 +56,15 @@ imdb <- read_delim("https://datasets.imdbws.com/title.ratings.tsv.gz",
                            delim="\t", na="\\N", quote='') %>%
   rename(rating_imdb=averageRating, votes_imdb=numVotes) %>%
   right_join(imdb, by="tconst") %>%
-  select(tconst, title, year, runtime, genre, rating_imdb) %>%
-  filter(!is.na(rating_imdb))
+  select(tconst, title, year, runtime, genre, rating_imdb, votes_imdb) %>%
+  filter(!is.na(rating_imdb)) %>%
+  # require at least 500 votes and end in 2021 to not get very new movies
+  filter(votes_imdb>=500 & year<2022)
 
 
 # Scrape other data -------------------------------------------------------
 
-#test <- imdb[sample(1:nrow(imdb), 100),]
+#test <- imdb[sample(1:nrow(imdb), 200),]
 
 scraped_data <- map_dfr(imdb$tconst, function(x){
 
@@ -71,13 +73,16 @@ scraped_data <- map_dfr(imdb$tconst, function(x){
     return(NULL)
   }
 
-  #print(x)
-
   # read OMDB page
   title_page <- curl::curl(url) %>% read_html()
 
-  #grab JSON data
-  omdb <- title_page %>% html_nodes("p") %>% html_text %>% fromJSON
+  #grab JSON data - wrap in a try to avoid errors stopping the execution
+  omdb <- NULL
+  try(omdb <- title_page %>% html_nodes("p") %>% html_text %>% fromJSON,
+      silent=TRUE)
+  if(is.null(omdb)) {
+    return(NULL)
+  }
 
   # Output for each movie
   return(list("tconst"=x,
@@ -86,11 +91,13 @@ scraped_data <- map_dfr(imdb$tconst, function(x){
                                    parse_number(omdb$Metascore)),
               "box_office" = ifelse(omdb$BoxOffice=="N/A", NA,
                                     parse_number(omdb$BoxOffice)),
-              "awards" = str_extract(omdb$Awards, "(?<=Won\\s)(\\d+)(?=\\sOscar)"),
+              "awards" = str_extract(omdb$Awards,
+                                     "(?<=Won\\s)(\\d+)(?=\\sOscar)"),
               "english" = ifelse(omdb$Language=="N/A", NA,
                                  str_detect(omdb$Language, "English")),
               "domestic" = ifelse(omdb$Country=="N/A", NA,
-                                  str_detect(omdb$Country, "United States|USA"))))
+                                  str_detect(omdb$Country,
+                                             "United States|USA"))))
 })
 
 movies <- scraped_data %>%
