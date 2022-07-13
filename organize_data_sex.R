@@ -52,7 +52,7 @@ sex <- sex %>%
 
 # Impute missing values ---------------------------------------------------
 
-sex <- complete(mice(sex, m=1))
+sex <- tibble(complete(mice(sex, m=1)))
 
 # Apply the gamma ---------------------------------------------------------
 
