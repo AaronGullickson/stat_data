@@ -1,0 +1,1 @@
+GSS data from 2014-2021 were extracted from the [GSS Data Explorer](https://gssdataexplorer.norc.org/home). The `GSS.dat` file is a plain text fixed-width file and the `GSS.dct` provides the information for processing that fixed-width file.
