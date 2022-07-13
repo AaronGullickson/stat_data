@@ -4,3 +4,4 @@
 .httr-oauth
 .DS_Store
 input/add_health/*.rda
+input/anes/*.dta

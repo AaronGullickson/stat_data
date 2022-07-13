@@ -6,7 +6,7 @@
 
 #add new packages to the chain here
 packages = c("here","tidyverse","stringr","rvest","rjson","RCurl","curl","mice",
-             "PASWR2")
+             "PASWR2","haven")
 
 package.check <- lapply(packages, FUN = function(x) {
   if (!require(x, character.only = TRUE)) {
