@@ -107,7 +107,7 @@ scraped_data <- map_dfr(imdb$tconst, function(x){
 })
 
 movies <- scraped_data %>%
-  mutate(awards=ifelse(is.na(awards), 0, awards),
+  mutate(awards=ifelse(is.na(awards), 0, as.numeric(awards)),
          maturity_rating=factor(maturity_rating,
                                 levels=c("G","PG","PG-13","R")),
          box_office=round(box_office/1000000,1)) %>%
@@ -115,6 +115,7 @@ movies <- scraped_data %>%
   filter(!is.na(maturity_rating) & !is.na(metascore) & !is.na(box_office)) %>%
   filter(english & domestic & box_office > 0) %>%
   select(title, year, runtime, maturity_rating, genre, box_office,
-         rating_imdb, metascore, awards)
+         rating_imdb, metascore, awards) %>%
+  arrange(year, title)
 
 save(movies, file=here("output","movies.RData"))
