@@ -14,7 +14,7 @@ source("check_packages.R")
 # https://api.data.gov/signup/
 
 #replace this with your API key
-api_key <- "WmW3SVDq3YIpgjxkfzGMNZsTataBMsheM70EAe0h"
+api_key <- "provide API key"
 
 # choose starting and ending year - crime rates will be averaged across
 # years
