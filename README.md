@@ -4,6 +4,8 @@ This repository contains the R code to produce several analytical datasets that 
 
 The raw data used to construct the analytical data is provided in the `input` directory. Each of the `organize_data_*.R` scripts provides R code to convert from the raw data to the analytical data. Some of the raw data used to create analytical data is not provided here because I do not have permission to redistribute data, but the README in each directory directs users how to gain access to this data which is all publicly available. Additionally, some data is downloaded directly in R from other APIs which will require users to have their own API keys.
 
+To ensure that users have all the packages required by the R code, they shold first source `check_packages.R`.
+
 ### Crimes
 
 The crimes data contain information on crime rates and demographic variables for all fifty US states and the District of Columbia. The crime rates are averaged over the years 2014-2018 and come from the FBI’s [Uniform Crime Reports](https://www.fbi.gov/services/cjis/ucr) (UCR). The UCR is a program where local law enforcement agencies all report crime statistics to the FBI and these are aggregated into final crime statistics. For our purposes, we are dividing crimes into two main categories of violent and property crime.
