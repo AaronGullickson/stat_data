@@ -157,4 +157,4 @@ politics <- politics %>%
 politics <- tibble(complete(mice(politics, 1)))
 
 #save the new data
-save(politics, file=here("output","politics.RData"))
+save(politics, version=2, file=here("output","politics.RData"))
