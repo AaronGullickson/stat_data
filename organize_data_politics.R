@@ -112,11 +112,11 @@ table(politics$V161155, politics$party, exclude=NULL)
 # Voting and Beliefs ------------------------------------------------------
 
 ## Presidential Vote
-politics$president <- factor(ifelse(politics$V162062x < -1, NA,
+politics$president <- factor(ifelse(politics$V162062x < -2, NA,
                                     ifelse(politics$V162062x>2, 3, politics$V162062x)),
-                             levels=c(1:3,-1),
+                             levels=c(1:3,-2),
                              labels=c("Clinton","Trump","Other","No Vote"))
-table(politics$V162034a, politics$president, exclude=NULL)
+table(politics$V162062x, politics$president, exclude=NULL)
 
 ## Anthropogenic Global Warming
 politics$globalwarm <- factor(ifelse(politics$V161221<0 | politics$V161222<0, NA,
