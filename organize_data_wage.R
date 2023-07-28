@@ -137,4 +137,4 @@ earnings <- cps %>%
          foreign_born, earn_type, earningwt)
 
 
-save(earnings, file=here("output","earnings.RData"))
+save(earnings, version=2, file=here("output","earnings.RData"))
