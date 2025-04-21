@@ -83,6 +83,8 @@ Here is a full description of all variables in the dataset that we will use.
 * **bandchoir**: Whether the student was in band or choir. Recorded as "Yes" or "No."
 * **nsports**: The number of different school sports a student reported participating in. Students who reported more than six sports were top-coded at the value of six.
 * **parent_income**: Parent’s household income measured in $1000’s of dollars.
+* **cluster**: Technical sampling variable indicating the primary sampling unit for the observation.
+* **sweight**: Technical sampling variable indicating the sampling weight for the observation.
 
 
 ### Sex

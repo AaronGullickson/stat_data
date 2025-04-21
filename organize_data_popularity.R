@@ -42,11 +42,11 @@ weights <- da21600.0004 %>%
   tibble
 
 # code base variables - this is the big one
-base <- da21600.0001 %>%
+addhealth <- da21600.0001 %>%
   mutate(AID=as.character(AID),
          race=ifelse(H1GI4=="(1) (1) Yes", "Latino",
                      str_trim(str_sub(H1GI9, 8))),
-         race=factor(race, names(sort(table(base$race), decreasing=TRUE))),
+         race=factor(race, names(sort(table(race), decreasing=TRUE))),
          gender=factor(str_trim(str_sub(BIO_SEX, 8))),
          grade=as.numeric(H1GI20)+6,
          grade_english=ifelse(as.numeric(H1ED11)>4, NA, 5-as.numeric(H1ED11)),
@@ -83,19 +83,11 @@ base <- da21600.0001 %>%
 
 # Save files --------------------------------------------------------------
 
-
-# save a version of the data with missing values and technical variables
-addhealth <- base %>%
-  select(grade, race, gender, nominations, alcohol_use, smoker, pseudo_gpa,
-         honor_society, bandchoir, nsports, parent_income, cluster, sweight)
-
-save(addhealth, file=here("output","addhealth.RData"))
-
 # now impute missing values
-popularity  <- tibble(complete(mice(addhealth,1)))
+popularity  <- tibble(complete(mice(addhealth, 1)))
 popularity <- popularity %>%
   select(grade, race, gender, nominations, alcohol_use, smoker, pseudo_gpa,
-         honor_society, bandchoir, nsports, parent_income)
+         honor_society, bandchoir, nsports, parent_income, cluster, sweight)
 
 save(popularity, file=here("output","popularity.RData"))
 
