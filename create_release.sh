@@ -7,7 +7,6 @@
 mkdir stat_data
 
 # put stuff in it
-cp output/addhealth.RData stat_data
 cp output/crimes.RData stat_data
 cp output/earnings.RData stat_data
 cp output/movies.RData stat_data
